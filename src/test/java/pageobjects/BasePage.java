@@ -54,6 +54,23 @@ public abstract class BasePage {
         closeCookiePopupButton.click();
     }
 
+    public boolean URLisCorrect(String url){
+        return driver.getCurrentUrl().contains(url);
+    }
+
+    public void refreshPage(){
+        driver.navigate().refresh();
+    }
+
+
+
+
+
+
+
+
+
+
     public LoginPage goToLoginPage(){
         wait.until(ExpectedConditions.elementToBeClickable(signInButton));
         signInButton.click();

@@ -52,13 +52,15 @@ public class FavoritesTest extends BaseTest{
 
     @Test
     void shouldFavoritesIconBeInactiveOnProductPageWhenItemRemovedFromFavoritesPage(){
+        String productUrl = "https://www2.hm.com/en_us/productpage.0803757001.html";
 
+        ProductPage productPage = new ProductPage(driver, wait).goTo(productUrl);
+        productPage.closeCookiePopup();
+        productPage.addItemToFavorites().header.viewFavorites().removeItemFromFavorites();
+        productPage.goTo(productUrl);
+        Assertions.assertFalse(productPage.isFavoriteButtonActive());
     }
 
-    @Test
-    void shouldFavoritesIconBeInactiveOnCategoryPageWhenItemRemovedFromFavoritesPage(){
-
-    }
 
     @Test
     void isPossibleToAddMultipleItemsToFavorites(){
@@ -72,27 +74,19 @@ public class FavoritesTest extends BaseTest{
 
     @Test
     void shouldURLbeCorrectWhenUserGoToFavorites(){
-
-
+        String productUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
+        FavoritesPage favoritesPage = new FavoritesPage(driver,wait).goTo(productUrl).header.viewFavorites();
+        Assertions.assertTrue(favoritesPage.URLisCorrect("favourites"));
     }
 
     @Test
     void refreshingPageDoesntAffectFavoritesList(){
+        String productUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
 
-    }
-
-    @Test
-    void favoritesButtonIsActiveOnProductPageWhenItemWasAddedToFavoritesFromMainPage(){
-
-    }
-
-    @Test
-    void favoritesButtonIsActiveOnCategoryPageWhenItemWasAddedToFavoritesFromProductPage(){
-
-    }
-
-    @Test
-    void shouldFavoritesIconBeInactiveOnProductPageWhenItemRemovedFromFavoritesFromMainPage(){
+        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(productUrl);
+        String itemsQty = categoryPage.addItemsToFavorites(2).header.viewFavorites().getItemsQuantity();
+        categoryPage.refreshPage();
+        Assertions.assertEquals("2 Items", itemsQty);
 
     }
 

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FavoritesPage extends BasePage {
+    public HeaderPage header;
 
     @FindBy(xpath = "//h3[@class ='sub-sub-heading ng-binding']")
     public WebElement itemName;
@@ -14,15 +15,16 @@ public class FavoritesPage extends BasePage {
     @FindBy(xpath = "//section[@class='segment favorites-empty']/a")
     private WebElement browseNowButton;
 
-    @FindBy(xpath = "//button[@class='RemoveButton-module_RemoveButton__2pjXf']")
+    @FindBy(xpath = "//button[@class='remove-product icon-close-black js-remove-favorite']")
     private WebElement removeFromFavoritesButton;
 
     @FindBy(xpath = "//span[@class='favorite-items-quantity-number ng-binding']")
     private WebElement itemsQuantity;
 
-    public void removeItemFromFavorites() {
-        //wait.until(ExpectedConditions.elementToBeClickable(removeFromFavoritesButton));
+    public FavoritesPage removeItemFromFavorites() {
+        wait.until(ExpectedConditions.elementToBeClickable(removeFromFavoritesButton));
         removeFromFavoritesButton.click();
+        return new FavoritesPage(driver,wait);
     }
 
     public String getProductName() {
@@ -39,8 +41,16 @@ public class FavoritesPage extends BasePage {
         return browseNowButton.isDisplayed();
     }
 
+    public FavoritesPage goTo(String productUrl) {
+        driver.navigate().to(productUrl);
+        return new FavoritesPage(driver, wait);
+    }
+
     public FavoritesPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
+        header = new HeaderPage(driver, wait);
     }
+
+
 }
 
