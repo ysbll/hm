@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SignInTest extends BaseTest {
 
     @Test
-    void shouldDisplayErrorMessageWhenNoPasswordProvided() throws InterruptedException {
+    void shouldDisplayErrorMessageWhenNoPasswordProvided(){
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
-        LoginPage loginPage = homePage.goToLoginPage();
-        loginPage.login(UserDataGenerator.emailGenerator(), "");
+        LoginPage loginPage = new LoginPage(driver, wait).goTo()
+                .login(UserDataGenerator.emailGenerator(), "");
         Assertions.assertTrue(loginPage.isPasswordRequiredAlertDisplayed());
     }
 
@@ -25,8 +25,7 @@ public class SignInTest extends BaseTest {
     void shouldDisplayErrorMessageWhenNoEmailProvided(){
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
-        LoginPage loginPage = homePage.goToLoginPage();
-        loginPage.login("", UserDataGenerator.passwordGenerator());
+        LoginPage loginPage = new LoginPage(driver,wait).goTo().login("", UserDataGenerator.passwordGenerator());
         assertTrue(loginPage.isEmailRequiredAlertDisplayed());
     }
 
@@ -34,8 +33,7 @@ public class SignInTest extends BaseTest {
     void shouldDisplayErrorMessageWhenNoEmailAndPasswordProvided(){
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
-        LoginPage loginPage = homePage.goToLoginPage();
-        loginPage.login("", "");
+        LoginPage loginPage = new LoginPage(driver,wait).goTo().login("", "");
         assertTrue(loginPage.isPasswordRequiredAlertDisplayed() && loginPage.isEmailRequiredAlertDisplayed());
     }
 
@@ -43,8 +41,8 @@ public class SignInTest extends BaseTest {
     void shouldDisplayErrorMessageWhenIncorrectEmailFormatProvided(){
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
-        LoginPage loginPage = homePage.goToLoginPage();
-        loginPage.login("lalala", UserDataGenerator.passwordGenerator());
+        LoginPage loginPage = new LoginPage(driver,wait).goTo()
+                .login("lalala", UserDataGenerator.passwordGenerator());
         assertTrue(loginPage.isIncorrectEmailFormatAlertDisplayed());
     }
 }

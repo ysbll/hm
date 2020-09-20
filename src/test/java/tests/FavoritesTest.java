@@ -87,7 +87,6 @@ public class FavoritesTest extends BaseTest{
         String itemsQty = categoryPage.addItemsToFavorites(2).header.viewFavorites().getItemsQuantity();
         categoryPage.refreshPage();
         Assertions.assertEquals("2 Items", itemsQty);
-
     }
 
 }

@@ -30,8 +30,6 @@ public abstract class BasePage {
     @FindBy(xpath = "//li/a[@data-signin-state='signedin']")
     protected WebElement myAccountButton;
 
-    @FindBy(xpath = "//article[@class='hm-product-item']")
-    private WebElement hmProductItem;
 
     @FindBy(xpath = "//div[@class='menu__services__item']/a[text()='Customer Service']")
     private WebElement customerServiceMenu;
@@ -63,19 +61,6 @@ public abstract class BasePage {
     }
 
 
-
-
-
-
-
-
-
-
-    public LoginPage goToLoginPage(){
-        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
-        signInButton.click();
-        return new LoginPage(driver, wait);
-    }
 
     public CustomerServicePage goToCustomerServicePage(){
         wait.until(ExpectedConditions.elementToBeClickable(customerServiceMenu));

@@ -25,12 +25,22 @@ public class LoginPage extends BasePage{
         super(driver,wait);
     }
 
-    public void login(String email, String password){
+    public LoginPage goTo(){
+        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
+        signInButton.click();
+        return new LoginPage(driver, wait);
+    }
+
+
+
+
+    public LoginPage login(String email, String password){
         wait.until(ExpectedConditions.visibilityOf(signInButton));
         signInEmailField.sendKeys(email);
         wait.until(ExpectedConditions.visibilityOf(signInButton));
         signInPasswordField.sendKeys(password);
         loginButton.submit();
+        return new LoginPage(driver,wait);
     }
 
     public boolean isPasswordRequiredAlertDisplayed(){
