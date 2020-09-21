@@ -60,11 +60,7 @@ public abstract class BasePage {
         driver.navigate().refresh();
     }
 
-
-
-    public CustomerServicePage goToCustomerServicePage(){
-        wait.until(ExpectedConditions.elementToBeClickable(customerServiceMenu));
-        customerServiceMenu.click();
-        return new CustomerServicePage(driver, wait);
-    }
+    /*public void goTo(String url){
+        driver.get(url);
+    }*/
 }

@@ -13,6 +13,8 @@ public class CustomerServicePage extends BasePage {
     @FindBy(xpath = "//button[@aria-label='Click to chat']")
     private WebElement chatButton;
 
+    ////td(@class='tcChat_agentLine')
+
     //td[@class='tcChat_agentLine']/span[@class='agentMsg']
 
 
@@ -29,6 +31,13 @@ public class CustomerServicePage extends BasePage {
         chatButton.click();
         driver.switchTo().frame(chatBox);
     }
+
+    public CustomerServicePage goTo(String page){
+        driver.navigate().to(page);
+        return new CustomerServicePage(driver, wait);
+    }
+
+
 
 
 

@@ -9,9 +9,9 @@ public class FavoritesTest extends BaseTest{
 
     @Test
     void nameOfAddedItemToFavoriteIsCorrectFromCategoryPage(){
-        String productUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
+        String categoryUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
 
-        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(productUrl);
+        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(categoryUrl);
         String productName = categoryPage.addItemToFavorites().getProductName();
         String addedItem = categoryPage.header.viewFavorites().getProductName();
         Assertions.assertEquals(productName, addedItem);
@@ -40,9 +40,9 @@ public class FavoritesTest extends BaseTest{
 
     @Test
     void shouldBeRemovedFromFavoritesWhenUnclickButtonOnCategoryPage(){
-        String productUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
+        String categoryUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
 
-        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(productUrl).addItemToFavorites()
+        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(categoryUrl).addItemToFavorites()
                 .removeFromFavorites();
         categoryPage.header.viewFavorites();
         FavoritesPage favoritesPage= new FavoritesPage(driver,wait);
@@ -64,26 +64,26 @@ public class FavoritesTest extends BaseTest{
 
     @Test
     void isPossibleToAddMultipleItemsToFavorites(){
-        String productUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
+        String categoryUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
         Random rand = new Random();
         int itemQty = rand.nextInt(15);
-        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(productUrl);
+        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(categoryUrl);
         String itemsQty = categoryPage.addItemsToFavorites(itemQty).header.viewFavorites().getItemsQuantity();
         Assertions.assertEquals(itemQty + " Items", itemsQty);
     }
 
     @Test
     void shouldURLbeCorrectWhenUserGoToFavorites(){
-        String productUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
-        FavoritesPage favoritesPage = new FavoritesPage(driver,wait).goTo(productUrl).header.viewFavorites();
+        String categoryUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
+        FavoritesPage favoritesPage = new FavoritesPage(driver,wait).goTo(categoryUrl).header.viewFavorites();
         Assertions.assertTrue(favoritesPage.URLisCorrect("favourites"));
     }
 
     @Test
     void refreshingPageDoesntAffectFavoritesList(){
-        String productUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
+        String categoryUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
 
-        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(productUrl);
+        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(categoryUrl);
         String itemsQty = categoryPage.addItemsToFavorites(2).header.viewFavorites().getItemsQuantity();
         categoryPage.refreshPage();
         Assertions.assertEquals("2 Items", itemsQty);
