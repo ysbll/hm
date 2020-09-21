@@ -8,6 +8,7 @@ public class TestDataReader extends FileReader{
     private String categoryURL;
     public String customerServiceURL;
     private String testDataLocation;
+    private String productURL;
 
     public TestDataReader(String testDataLocation)
      {
@@ -19,6 +20,8 @@ public class TestDataReader extends FileReader{
      void loadData(){
         categoryURL = properties.getProperty("category.url");
         customerServiceURL = properties.getProperty("customerService.url");
+        productURL = properties.getProperty("product.url");
+
     }
 
     public String getTestDataLocation(){
@@ -32,4 +35,6 @@ public class TestDataReader extends FileReader{
     public String getCategoryURL(){
         return categoryURL;
     }
+
+    public String getProductURL() { return productURL;}
 }
