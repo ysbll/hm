@@ -1,5 +1,7 @@
 package tests;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pageobjects.*;
@@ -12,6 +14,7 @@ public class FavoritesTest extends BaseTest{
         String categoryUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
 
         CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(categoryUrl);
+        System.out.println("weszlo");
         String productName = categoryPage.addItemToFavorites().getProductName();
         String addedItem = categoryPage.header.viewFavorites().getProductName();
         Assertions.assertEquals(productName, addedItem);
@@ -19,7 +22,7 @@ public class FavoritesTest extends BaseTest{
 
     @Test
     void nameOfAddedItemToFavoriteIsCorrectFromProductPage() {
-        String productUrl = "https://www2.hm.com/en_us/productpage.0803757001.html";
+        String productUrl = "https://www2.hm.com/en_us/productpage.0763194001.html";
 
         ProductPage productPage = new ProductPage(driver, wait).goTo(productUrl);
         productPage.closeCookiePopup();
@@ -30,7 +33,7 @@ public class FavoritesTest extends BaseTest{
 
     @Test
     void shouldBeRemovedFromFavoritesWhenUnclickButtonOnProductPage(){
-        String productUrl = "https://www2.hm.com/en_us/productpage.0803757001.html";
+        String productUrl = "https://www2.hm.com/en_us/productpage.0763194001.html";
 
         ProductPage productPage = new ProductPage(driver, wait).goTo(productUrl);
         productPage.closeCookiePopup();
@@ -52,7 +55,7 @@ public class FavoritesTest extends BaseTest{
 
     @Test
     void shouldFavoritesIconBeInactiveOnProductPageWhenItemRemovedFromFavoritesPage(){
-        String productUrl = "https://www2.hm.com/en_us/productpage.0803757001.html";
+        String productUrl = "https://www2.hm.com/en_us/productpage.0763194001.html";
 
         ProductPage productPage = new ProductPage(driver, wait).goTo(productUrl);
         productPage.closeCookiePopup();
@@ -83,9 +86,10 @@ public class FavoritesTest extends BaseTest{
     void refreshingPageDoesntAffectFavoritesList(){
         String categoryUrl = "https://www2.hm.com/en_us/women/products/view-all.html";
 
-        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(categoryUrl);
-        String itemsQty = categoryPage.addItemsToFavorites(2).header.viewFavorites().getItemsQuantity();
-        categoryPage.refreshPage();
+        CategoryPage categoryPage = new CategoryPage(driver,wait).goTo(categoryUrl).addItemsToFavorites(2);
+        FavoritesPage favoritesPage = new FavoritesPage(driver,wait).header.viewFavorites();
+        favoritesPage.refreshPage();
+        String itemsQty = favoritesPage.getItemsQuantity();
         Assertions.assertEquals("2 Items", itemsQty);
     }
 

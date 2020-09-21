@@ -33,6 +33,7 @@ public class FavoritesPage extends BasePage {
     }
 
     public String getItemsQuantity() {
+        wait.until(ExpectedConditions.visibilityOf(itemsQuantity));
         return itemsQuantity.getText();
     }
 

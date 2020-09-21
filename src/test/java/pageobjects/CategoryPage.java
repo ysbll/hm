@@ -3,6 +3,7 @@ package pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CategoryPage extends BasePage {
@@ -19,6 +20,7 @@ public class CategoryPage extends BasePage {
     public WebElement productName;
 
     public CategoryPage addItemToFavorites(){
+        wait.until(ExpectedConditions.elementToBeClickable(favoriteButton));
         favoriteButton.click();
         return new CategoryPage(driver, wait);
     }
