@@ -1,8 +1,8 @@
 package tests;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 import pageobjects.CustomerServicePage;
+import org.testng.Assert;
 
 public class ChatBoxTest extends BaseTest{
 
@@ -16,7 +16,7 @@ public class ChatBoxTest extends BaseTest{
         customerServicePage.goToChatBox();
         System.out.println("weszlo123");
 
-        Assertions.assertEquals("H&M Virtual Assistant:", customerServicePage.isChatboxOpened());
+        Assert.assertEquals(customerServicePage.isChatboxOpened(), "H&M Virtual Assistant:");
 
     }
 

@@ -14,8 +14,6 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//h1[@class='primary product-item-headline']")
     public WebElement productName;
 
-
-
     public ProductPage addItemToFavorites(){
         favoriteButton.click();
         return new ProductPage(driver, wait);

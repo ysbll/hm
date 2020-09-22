@@ -3,27 +3,27 @@ package tests;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
 import utils.ConfigurationReader;
 import utils.TestDataReader;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected ConfigurationReader configuration;
     protected TestDataReader testData;
 
-    @BeforeAll
+    @BeforeClass
     public void getConfiguration(){
         testData = new TestDataReader("src/test/java/tests/TestData.properties");
         configuration = new ConfigurationReader("src/test/java/configs/Configuration.properties");
     }
 
-    @BeforeEach
+    @BeforeMethod
     public void setUp(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -32,7 +32,7 @@ public class BaseTest {
         driver.manage().deleteAllCookies();
     }
 
-    @AfterEach
+    @AfterMethod
     void tearDown(){
         driver.quit();
     }

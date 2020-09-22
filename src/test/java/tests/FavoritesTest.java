@@ -1,9 +1,7 @@
 package tests;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import pageobjects.*;
 import java.util.Random;
 
@@ -16,7 +14,7 @@ public class FavoritesTest extends BaseTest{
         System.out.println("weszlo");
         String productName = categoryPage.addItemToFavorites().getProductName();
         String addedItem = categoryPage.header.viewFavorites().getProductName();
-        Assertions.assertEquals(productName, addedItem);
+        Assert.assertEquals(addedItem, productName);
     }
 
     @Test
@@ -26,7 +24,7 @@ public class FavoritesTest extends BaseTest{
         productPage.closeCookiePopup();
         String productName = productPage.addItemToFavorites().getProductName();
         String addedItem = productPage.header.viewFavorites().getProductName();
-        Assertions.assertEquals(productName, addedItem);
+        Assert.assertEquals(addedItem, productName);
     }
 
     @Test
@@ -35,7 +33,8 @@ public class FavoritesTest extends BaseTest{
                 .goTo(configuration.getBaseUrl() + testData.getProductURL());
         productPage.closeCookiePopup();
         productPage.addItemToFavorites().addItemToFavorites();
-        Assertions.assertFalse(productPage.isFavoriteButtonActive());
+
+        Assert.assertFalse(productPage.isFavoriteButtonActive());
     }
 
     @Test
@@ -45,7 +44,7 @@ public class FavoritesTest extends BaseTest{
                 .removeFromFavorites();
         categoryPage.header.viewFavorites();
         FavoritesPage favoritesPage= new FavoritesPage(driver,wait);
-        Assertions.assertTrue(favoritesPage.isFavoriteListEmpty());
+        Assert.assertTrue(favoritesPage.isFavoriteListEmpty());
     }
 
     @Test
@@ -55,7 +54,7 @@ public class FavoritesTest extends BaseTest{
         productPage.closeCookiePopup();
         productPage.addItemToFavorites().header.viewFavorites().removeItemFromFavorites();
         productPage.goTo(testData.getProductURL());
-        Assertions.assertFalse(productPage.isFavoriteButtonActive());
+        Assert.assertFalse(productPage.isFavoriteButtonActive());
     }
 
 
@@ -66,14 +65,14 @@ public class FavoritesTest extends BaseTest{
         CategoryPage categoryPage = new CategoryPage(driver,wait)
                 .goTo(configuration.getBaseUrl() + testData.getCategoryURL());
         String itemsQty = categoryPage.addItemsToFavorites(itemQty).header.viewFavorites().getItemsQuantity();
-        Assertions.assertEquals(itemQty + " Items", itemsQty);
+        Assert.assertEquals(itemsQty, itemQty + " Items");
     }
 
     @Test
     void shouldURLbeCorrectWhenUserGoToFavorites(){
         FavoritesPage favoritesPage = new FavoritesPage(driver,wait)
                 .goTo(configuration.getBaseUrl() + testData.getCategoryURL()).header.viewFavorites();
-        Assertions.assertTrue(favoritesPage.URLisCorrect("favourites"));
+        Assert.assertTrue(favoritesPage.URLisCorrect("favourites"));
     }
 
     @Test
@@ -83,7 +82,7 @@ public class FavoritesTest extends BaseTest{
         FavoritesPage favoritesPage = new FavoritesPage(driver,wait).header.viewFavorites();
         favoritesPage.refreshPage();
         String itemsQty = favoritesPage.getItemsQuantity();
-        Assertions.assertEquals("2 Items", itemsQty);
+        Assert.assertEquals(itemsQty, "2 Items");
     }
 
 }

@@ -1,14 +1,10 @@
 package tests;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import pageobjects.HomePage;
 import pageobjects.LoginPage;
 import utils.UserDataGenerator;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SignInTest extends BaseTest {
 
@@ -18,7 +14,7 @@ public class SignInTest extends BaseTest {
         homePage.openPage();
         LoginPage loginPage = new LoginPage(driver, wait).goTo()
                 .login(UserDataGenerator.emailGenerator(), "");
-        Assertions.assertTrue(loginPage.isPasswordRequiredAlertDisplayed());
+        Assert.assertTrue(loginPage.isPasswordRequiredAlertDisplayed());
     }
 
     @Test
@@ -26,7 +22,7 @@ public class SignInTest extends BaseTest {
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
         LoginPage loginPage = new LoginPage(driver,wait).goTo().login("", UserDataGenerator.passwordGenerator());
-        assertTrue(loginPage.isEmailRequiredAlertDisplayed());
+        Assert.assertTrue(loginPage.isEmailRequiredAlertDisplayed());
     }
 
     @Test
@@ -34,7 +30,7 @@ public class SignInTest extends BaseTest {
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
         LoginPage loginPage = new LoginPage(driver,wait).goTo().login("", "");
-        assertTrue(loginPage.isPasswordRequiredAlertDisplayed() && loginPage.isEmailRequiredAlertDisplayed());
+        Assert.assertTrue(loginPage.isPasswordRequiredAlertDisplayed() && loginPage.isEmailRequiredAlertDisplayed());
     }
 
     @Test
@@ -43,6 +39,6 @@ public class SignInTest extends BaseTest {
         homePage.openPage();
         LoginPage loginPage = new LoginPage(driver,wait).goTo()
                 .login("lalala", UserDataGenerator.passwordGenerator());
-        assertTrue(loginPage.isIncorrectEmailFormatAlertDisplayed());
+        Assert.assertTrue(loginPage.isIncorrectEmailFormatAlertDisplayed());
     }
 }

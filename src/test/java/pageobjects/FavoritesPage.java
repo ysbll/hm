@@ -28,7 +28,7 @@ public class FavoritesPage extends BasePage {
     }
 
     public String getProductName() {
-        wait.until(ExpectedConditions.invisibilityOf(itemName));
+        wait.until(ExpectedConditions.visibilityOf(itemName));
         return itemName.getText();
     }
 

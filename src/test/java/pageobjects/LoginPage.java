@@ -20,7 +20,6 @@ public class LoginPage extends BasePage{
     @FindBy(id="modal-txt-signin-email-email-format-error")
     private WebElement incorrectEmailFormatAlert;
 
-
     public LoginPage(WebDriver driver, WebDriverWait wait){
         super(driver,wait);
     }
@@ -30,9 +29,6 @@ public class LoginPage extends BasePage{
         signInButton.click();
         return new LoginPage(driver, wait);
     }
-
-
-
 
     public LoginPage login(String email, String password){
         wait.until(ExpectedConditions.visibilityOf(signInButton));

@@ -60,7 +60,4 @@ public abstract class BasePage {
         driver.navigate().refresh();
     }
 
-    /*public void goTo(String url){
-        driver.get(url);
-    }*/
 }
