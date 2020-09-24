@@ -11,7 +11,6 @@ public class FavoritesTest extends BaseTest{
     void nameOfAddedItemToFavoriteIsCorrectFromCategoryPage(){
         CategoryPage categoryPage = new CategoryPage(driver,wait)
                 .goTo(configuration.getBaseUrl() + testData.getCategoryURL());
-        System.out.println("weszlo");
         String productName = categoryPage.addItemToFavorites().getProductName();
         String addedItem = categoryPage.header.viewFavorites().getProductName();
         Assert.assertEquals(addedItem, productName);
