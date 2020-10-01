@@ -13,7 +13,7 @@ public class FavoritesTest extends BaseTest{
                 .goTo(configuration.getBaseUrl() + testData.getCategoryURL());
         String productName = categoryPage.addItemToFavorites().getProductName();
         String addedItem = categoryPage.header.viewFavorites().getProductName();
-        Assert.assertEquals(addedItem, productName);
+        Assert.assertEquals(addedItem, productName, "Name of Added item is not match with item in Favorite page.");
     }
 
     @Test

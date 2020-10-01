@@ -21,6 +21,12 @@ public class UserDataGenerator {
         return password;
     }
 
+    public static String fileNameGenerator(){
+        Random random = new Random(10000);
+        String fileName = "Screen" + random;
+        return fileName;
+    }
+
 
 
 

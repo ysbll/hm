@@ -1,5 +1,6 @@
 package pageobjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,10 +12,10 @@ public class CustomerServicePage extends BasePage {
     @FindBy(id="inqChatStage")
     private WebElement chatBox;
 
-    @FindBy(xpath = "//button[@id='tcChat_btnRestore']")
+    @FindBy(xpath = "//button[@aria-label='Click to chat']")
     private WebElement chatButton;
 
-    @FindBy(xpath = "td(@class='tcChat_agentLine')")
+    @FindBy(xpath = "//span[@class='agentMsg']")
     private WebElement agentLineText;
 
     //td[@class='tcChat_agentLine']/span[@class='agentMsg']
@@ -30,10 +31,8 @@ public class CustomerServicePage extends BasePage {
     }
 
     public void goToChatBox(){
-        driver.switchTo().frame("inqChatStage");
-        //wait.until(ExpectedConditions.elementToBeClickable(chatButton));
+        wait.until(ExpectedConditions.elementToBeClickable(chatButton));
         chatButton.click();
-        //driver.switchTo().frame(chatBox);
     }
 
     public CustomerServicePage goTo(String page){
@@ -41,11 +40,12 @@ public class CustomerServicePage extends BasePage {
         return new CustomerServicePage(driver, wait);
     }
 
-    public String isChatboxOpened(){
-        //driver.switchTo().frame();
-        wait.until(ExpectedConditions.visibilityOf(agentLineText));
+    public boolean isChatboxOpened(){
+        //driver.switchTo().frame("inqChatStage");
+        //wait.until(ExpectedConditions.visibilityOf(agentLineText));
+        //waitForElementToBeVisible("agentLineText");
         String welcomeText = agentLineText.getText();
-        return welcomeText;
+        return welcomeText.contains("H&M Virtual Assistant:");
     }
 
 
