@@ -31,10 +31,6 @@ public abstract class BasePage {
     @FindBy(xpath = "//li/a[@data-signin-state='signedin']")
     protected WebElement myAccountButton;
 
-
-    @FindBy(xpath = "//div[@class='menu__services__item']/a[text()='Customer Service']")
-    private WebElement customerServiceMenu;
-
     @FindBy(xpath = "//button[@class='close icon-close-white js-close']")
     private WebElement closeCookiePopupButton;
 
@@ -60,7 +56,5 @@ public abstract class BasePage {
     public void refreshPage(){
         driver.navigate().refresh();
     }
-
-
 
 }

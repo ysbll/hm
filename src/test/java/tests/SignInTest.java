@@ -1,5 +1,6 @@
 package tests;
 
+import com.aventstack.extentreports.Status;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageobjects.HomePage;

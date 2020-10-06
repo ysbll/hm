@@ -1,1 +1,9 @@
-<suite name = "Smoke Test Suite"
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name = "Smoke Test Suite">
+    <test name="Application Test">
+    <classes>
+        <class name="tests.SignInTest"></class>
+        <class name="tests.ChatBoxTest"></class>
+    </classes>
+    </test>
+</suite>

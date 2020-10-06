@@ -18,9 +18,6 @@ public class CustomerServicePage extends BasePage {
     @FindBy(xpath = "//span[@class='agentMsg']")
     private WebElement agentLineText;
 
-    //td[@class='tcChat_agentLine']/span[@class='agentMsg']
-
-
     public CustomerServicePage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }

@@ -1,5 +1,8 @@
 package tests;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -21,11 +24,14 @@ public class BaseTest {
     protected WebDriverWait wait;
     protected ConfigurationReader configuration;
     protected TestDataReader testData;
+    protected ExtentHtmlReporter htmlReport;
+    protected ExtentReports extentReports;
+    protected ExtentTest extentTest;
 
-    @BeforeClass
+    @BeforeSuite
     public void getConfiguration(){
         testData = new TestDataReader("src/test/java/tests/TestData.properties");
-        configuration = new ConfigurationReader("src/test/java/configs/Configuration.properties");
+        configuration = new ConfigurationReader("src/main/java/configs/Configuration.properties");
     }
 
     @BeforeMethod
@@ -45,7 +51,6 @@ public class BaseTest {
             String directory = System.getProperty("user.dir") + "//screenshots//";
             File sourceFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(sourceFile, new File(directory + fileName));
-
         }
         driver.quit();
     }
