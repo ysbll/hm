@@ -19,7 +19,7 @@ public class CategoryPage extends BasePage {
     @FindBy(xpath = "//h3[@class='item-heading']/a")
     public WebElement productName;
 
-    public CategoryPage addItemToFavorites(){
+    public CategoryPage addItemToFavorites() {
         wait.until(ExpectedConditions.elementToBeClickable(favoriteButton));
         favoriteButton.click();
         return new CategoryPage(driver, wait);
@@ -30,23 +30,23 @@ public class CategoryPage extends BasePage {
         return new CategoryPage(driver, wait);
     }
 
-    public CategoryPage addItemsToFavorites(int qty){
-        for( int i =0; i < qty; i++ ){
+    public CategoryPage addItemsToFavorites(int qty) {
+        for (int i = 0; i < qty; i++) {
             addItemToFavorites();
         }
-        return new CategoryPage(driver,wait);
+        return new CategoryPage(driver, wait);
     }
 
-    public CategoryPage removeFromFavorites(){
+    public CategoryPage removeFromFavorites() {
         favoriteButtonActive.click();
-        return new CategoryPage(driver,wait);
+        return new CategoryPage(driver, wait);
     }
 
-    public String getProductName(){
+    public String getProductName() {
         return productName.getText();
     }
 
-    public CategoryPage(WebDriver driver, WebDriverWait wait){
+    public CategoryPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         header = new HeaderPage(driver, wait);
     }

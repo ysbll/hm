@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CustomerServicePage extends BasePage {
 
-    @FindBy(id="inqChatStage")
+    @FindBy(id = "inqChatStage")
     private WebElement chatBox;
 
     @FindBy(xpath = "//button[@aria-label='Click to chat']")
@@ -23,32 +23,27 @@ public class CustomerServicePage extends BasePage {
     }
 
 
-    public void openChatBox(){
+    public void openChatBox() {
         chatButton.click();
     }
 
-    public void goToChatBox(){
+    public void goToChatBox() {
         wait.until(ExpectedConditions.elementToBeClickable(chatButton));
         chatButton.click();
     }
 
-    public CustomerServicePage goTo(String page){
+    public CustomerServicePage goTo(String page) {
         driver.navigate().to(page);
         return new CustomerServicePage(driver, wait);
     }
 
-    public boolean isChatboxOpened(){
+    public boolean isChatboxOpened() {
         //driver.switchTo().frame("inqChatStage");
         //wait.until(ExpectedConditions.visibilityOf(agentLineText));
         //waitForElementToBeVisible("agentLineText");
         String welcomeText = agentLineText.getText();
         return welcomeText.contains("H&M Virtual Assistant:");
     }
-
-
-
-
-
 
 
 }

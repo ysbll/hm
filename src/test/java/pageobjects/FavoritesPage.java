@@ -24,7 +24,7 @@ public class FavoritesPage extends BasePage {
     public FavoritesPage removeItemFromFavorites() {
         wait.until(ExpectedConditions.elementToBeClickable(removeFromFavoritesButton));
         removeFromFavoritesButton.click();
-        return new FavoritesPage(driver,wait);
+        return new FavoritesPage(driver, wait);
     }
 
     public String getProductName() {

@@ -34,26 +34,26 @@ public abstract class BasePage {
     @FindBy(xpath = "//button[@class='close icon-close-white js-close']")
     private WebElement closeCookiePopupButton;
 
-    protected BasePage(WebDriver driver, WebDriverWait wait){
+    protected BasePage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
         this.wait = wait;
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
-    public void openPage(){
+    public void openPage() {
         driver.get(MAIN_URL);
     }
 
-    public void closeCookiePopup(){
+    public void closeCookiePopup() {
         wait.until(ExpectedConditions.elementToBeClickable(closeCookiePopupButton));
         closeCookiePopupButton.click();
     }
 
-    public boolean URLisCorrect(String url){
+    public boolean URLisCorrect(String url) {
         return driver.getCurrentUrl().contains(url);
     }
 
-    public void refreshPage(){
+    public void refreshPage() {
         driver.navigate().refresh();
     }
 

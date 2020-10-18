@@ -10,7 +10,7 @@ import utils.UserDataGenerator;
 public class SignInTest extends BaseTest {
 
     @Test
-    void shouldDisplayErrorMessageWhenNoPasswordProvided(){
+    void shouldDisplayErrorMessageWhenNoPasswordProvided() {
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
         LoginPage loginPage = new LoginPage(driver, wait).goTo()
@@ -19,26 +19,26 @@ public class SignInTest extends BaseTest {
     }
 
     @Test
-    void shouldDisplayErrorMessageWhenNoEmailProvided(){
+    void shouldDisplayErrorMessageWhenNoEmailProvided() {
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
-        LoginPage loginPage = new LoginPage(driver,wait).goTo().login("", UserDataGenerator.passwordGenerator());
+        LoginPage loginPage = new LoginPage(driver, wait).goTo().login("", UserDataGenerator.passwordGenerator());
         Assert.assertTrue(loginPage.isEmailRequiredAlertDisplayed());
     }
 
     @Test
-    void shouldDisplayErrorMessageWhenNoEmailAndPasswordProvided(){
+    void shouldDisplayErrorMessageWhenNoEmailAndPasswordProvided() {
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
-        LoginPage loginPage = new LoginPage(driver,wait).goTo().login("", "");
+        LoginPage loginPage = new LoginPage(driver, wait).goTo().login("", "");
         Assert.assertTrue(loginPage.isPasswordRequiredAlertDisplayed() && loginPage.isEmailRequiredAlertDisplayed());
     }
 
     @Test
-    void shouldDisplayErrorMessageWhenIncorrectEmailFormatProvided(){
+    void shouldDisplayErrorMessageWhenIncorrectEmailFormatProvided() {
         HomePage homePage = new HomePage(driver, wait);
         homePage.openPage();
-        LoginPage loginPage = new LoginPage(driver,wait).goTo()
+        LoginPage loginPage = new LoginPage(driver, wait).goTo()
                 .login("lalala", UserDataGenerator.passwordGenerator());
         Assert.assertTrue(loginPage.isIncorrectEmailFormatAlertDisplayed());
     }

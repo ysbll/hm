@@ -6,40 +6,40 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
-    @FindBy(id= "modal-txt-signin-password-required-error")
+    @FindBy(id = "modal-txt-signin-password-required-error")
     private WebElement passwordAlert;
 
-    @FindBy(id="modal-txt-signin-email-required-error")
+    @FindBy(id = "modal-txt-signin-email-required-error")
     private WebElement emailRequiredAlert;
 
     @FindBy(xpath = "//div[contains(@class, 'Name--container')]")
     private WebElement nameContainer;
 
-    @FindBy(id="modal-txt-signin-email-email-format-error")
+    @FindBy(id = "modal-txt-signin-email-email-format-error")
     private WebElement incorrectEmailFormatAlert;
 
-    public LoginPage(WebDriver driver, WebDriverWait wait){
-        super(driver,wait);
+    public LoginPage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
 
-    public LoginPage goTo(){
+    public LoginPage goTo() {
         wait.until(ExpectedConditions.elementToBeClickable(signInButton));
         signInButton.click();
         return new LoginPage(driver, wait);
     }
 
-    public LoginPage login(String email, String password){
+    public LoginPage login(String email, String password) {
         wait.until(ExpectedConditions.visibilityOf(signInButton));
         signInEmailField.sendKeys(email);
         wait.until(ExpectedConditions.visibilityOf(signInButton));
         signInPasswordField.sendKeys(password);
         loginButton.submit();
-        return new LoginPage(driver,wait);
+        return new LoginPage(driver, wait);
     }
 
-    public boolean isPasswordRequiredAlertDisplayed(){
+    public boolean isPasswordRequiredAlertDisplayed() {
         wait.until(ExpectedConditions.visibilityOf(passwordAlert));
         return passwordAlert.getText().contains("Please enter a password.");
     }
@@ -49,7 +49,7 @@ public class LoginPage extends BasePage{
         return emailRequiredAlert.getText().contains("Enter an email address.");
     }
 
-    public boolean isIncorrectEmailFormatAlertDisplayed(){
+    public boolean isIncorrectEmailFormatAlertDisplayed() {
         wait.until(ExpectedConditions.visibilityOf(incorrectEmailFormatAlert));
         return incorrectEmailFormatAlert.getText().contains("Incorrect format");
     }

@@ -28,28 +28,28 @@ public class BaseTest {
     protected ExtentReports extentReports;
     protected ExtentTest extentTest;
 
-    @BeforeSuite
-    public void getConfiguration(){
+    @BeforeClass
+    public void getConfiguration() {
         testData = new TestDataReader("src/test/java/tests/TestData.properties");
         configuration = new ConfigurationReader("src/main/java/configs/Configuration.properties");
     }
 
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver,5000);
+        wait = new WebDriverWait(driver, 5000);
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
     }
 
     @AfterMethod
     void afterMethod(ITestResult testResult) throws IOException {
-        if(testResult.getStatus() == ITestResult.FAILURE){
+        if (testResult.getStatus() == ITestResult.FAILURE) {
             System.out.println("Failed " + testResult.getMethod().getMethodName());
             String fileName = UserDataGenerator.fileNameGenerator() + ".png";
             String directory = System.getProperty("user.dir") + "//screenshots//";
-            File sourceFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            File sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(sourceFile, new File(directory + fileName));
         }
         driver.quit();

@@ -14,7 +14,7 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//h1[@class='primary product-item-headline']")
     public WebElement productName;
 
-    public ProductPage addItemToFavorites(){
+    public ProductPage addItemToFavorites() {
         favoriteButton.click();
         return new ProductPage(driver, wait);
     }
@@ -24,11 +24,11 @@ public class ProductPage extends BasePage {
         return new ProductPage(driver, wait);
     }
 
-    public String getProductName(){
+    public String getProductName() {
         return productName.getText();
     }
 
-    public ProductPage(WebDriver driver, WebDriverWait wait){
+    public ProductPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         header = new HeaderPage(driver, wait);
     }

@@ -15,7 +15,7 @@ public class HeaderPage extends BasePage {
     @FindBy(xpath = "//a[@class='menu__favorites']")
     protected WebElement favoritesIcon;
 
-    public FavoritesPage viewFavorites(){
+    public FavoritesPage viewFavorites() {
         wait.until(ExpectedConditions.elementToBeClickable(favoritesIcon));
         favoritesIcon.click();
         return new FavoritesPage(driver, wait);
