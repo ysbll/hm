@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageobjects.CustomerServicePage;
+import page.objects.CustomerServicePage;
 
 public class ChatBoxTest extends BaseTest {
 
@@ -14,5 +14,4 @@ public class ChatBoxTest extends BaseTest {
         customerServicePage.goToChatBox();
         Assert.assertTrue(customerServicePage.isChatboxOpened(), "Welcome message is not correct.");
     }
-
 }

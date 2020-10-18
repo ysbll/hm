@@ -5,18 +5,16 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import drivers.DriverManager;
 import drivers.DriverUtils;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import utils.ConfigurationReader;
-import utils.TestDataReader;
-import utils.UserDataGenerator;
+import utilities.ConfigurationReader;
+import utilities.TestDataReader;
+import utilities.UserDataGenerator;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,9 +24,6 @@ public class BaseTest {
     protected WebDriverWait wait;
     protected ConfigurationReader configuration;
     protected TestDataReader testData;
-    protected ExtentHtmlReporter htmlReport;
-    protected ExtentReports extentReports;
-    protected ExtentTest extentTest;
 
     @BeforeClass
     public void getConfiguration() {
@@ -39,13 +34,8 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         driver = DriverManager.getWebDriver();
-        //DriverUtils.navigateToPage("https://zageno.com/");
         DriverUtils.setInitialConfiguration();
         wait = new WebDriverWait(driver, 5000);
-
-
-        //driver.manage().window().maximize();
-        //driver.manage().deleteAllCookies();
     }
 
     @AfterMethod

@@ -1,11 +1,10 @@
 package tests;
 
-import com.aventstack.extentreports.Status;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageobjects.HomePage;
-import pageobjects.LoginPage;
-import utils.UserDataGenerator;
+import page.objects.HomePage;
+import page.objects.LoginPage;
+import utilities.UserDataGenerator;
 
 public class SignInTest extends BaseTest {
 

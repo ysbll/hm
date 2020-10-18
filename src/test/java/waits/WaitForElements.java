@@ -11,14 +11,13 @@ public class WaitForElements {
         return new WebDriverWait(DriverManager.getWebDriver(), 10);
     }
 
-    public static void waitUntilElementIsVisible(WebElement element){
+    public static void waitUntilElementIsVisible(WebElement element) {
         WebDriverWait webDriverWait = getWebDriverWait();
         webDriverWait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static void waitUntilElementIsClickable(WebElement element){
+    public static void waitUntilElementIsClickable(WebElement element) {
         WebDriverWait webDriverWait = getWebDriverWait();
         webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
     }
-
 }

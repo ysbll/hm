@@ -2,7 +2,9 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageobjects.*;
+import page.objects.CategoryPage;
+import page.objects.FavoritesPage;
+import page.objects.ProductPage;
 
 import java.util.Random;
 
@@ -88,5 +90,4 @@ public class FavoritesTest extends BaseTest {
         String itemsQty = favoritesPage.getItemsQuantity();
         Assert.assertEquals(itemsQty, "2 Items");
     }
-
 }
