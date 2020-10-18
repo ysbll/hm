@@ -1,11 +1,13 @@
 package pageobjects;
 
+import drivers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import waits.WaitForElements;
 
 public class CustomerServicePage extends BasePage {
 
@@ -18,23 +20,18 @@ public class CustomerServicePage extends BasePage {
     @FindBy(xpath = "//span[@class='agentMsg']")
     private WebElement agentLineText;
 
-    public CustomerServicePage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-    }
-
-
     public void openChatBox() {
         chatButton.click();
     }
 
     public void goToChatBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(chatButton));
+        WaitForElements.waitUntilElementIsClickable(chatButton);
         chatButton.click();
     }
 
     public CustomerServicePage goTo(String page) {
-        driver.navigate().to(page);
-        return new CustomerServicePage(driver, wait);
+        DriverManager.getWebDriver().navigate().to(page);
+        return new CustomerServicePage();
     }
 
     public boolean isChatboxOpened() {

@@ -1,5 +1,6 @@
 package pageobjects;
 
+import drivers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import waits.WaitForElements;
 
 public abstract class BasePage {
 
@@ -34,27 +36,26 @@ public abstract class BasePage {
     @FindBy(xpath = "//button[@class='close icon-close-white js-close']")
     private WebElement closeCookiePopupButton;
 
-    protected BasePage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
-        PageFactory.initElements(driver, this);
+    public BasePage() {
+        PageFactory.initElements(DriverManager.getWebDriver(), this);
     }
 
+
     public void openPage() {
-        driver.get(MAIN_URL);
+        DriverManager.getWebDriver().get(MAIN_URL);
     }
 
     public void closeCookiePopup() {
-        wait.until(ExpectedConditions.elementToBeClickable(closeCookiePopupButton));
+        WaitForElements.waitUntilElementIsClickable(closeCookiePopupButton);
         closeCookiePopupButton.click();
     }
 
     public boolean URLisCorrect(String url) {
-        return driver.getCurrentUrl().contains(url);
+        return DriverManager.getWebDriver().getCurrentUrl().contains(url);
     }
 
     public void refreshPage() {
-        driver.navigate().refresh();
+        DriverManager.getWebDriver().navigate().refresh();
     }
 
 }

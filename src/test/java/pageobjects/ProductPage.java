@@ -1,5 +1,6 @@
 package pageobjects;
 
+import drivers.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,21 +17,21 @@ public class ProductPage extends BasePage {
 
     public ProductPage addItemToFavorites() {
         favoriteButton.click();
-        return new ProductPage(driver, wait);
+        return new ProductPage();
     }
 
     public ProductPage goTo(String productUrl) {
-        driver.navigate().to(productUrl);
-        return new ProductPage(driver, wait);
+        DriverManager.getWebDriver().navigate().to(productUrl);
+        return new ProductPage();
     }
 
     public String getProductName() {
         return productName.getText();
     }
 
-    public ProductPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        header = new HeaderPage(driver, wait);
+    public ProductPage() {
+        super();
+        header = new HeaderPage();
     }
 
     public boolean isFavoriteButtonActive() {

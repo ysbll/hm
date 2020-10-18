@@ -3,6 +3,8 @@ package tests;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import drivers.DriverManager;
+import drivers.DriverUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -36,11 +38,14 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = DriverManager.getWebDriver();
+        //DriverUtils.navigateToPage("https://zageno.com/");
+        DriverUtils.setInitialConfiguration();
         wait = new WebDriverWait(driver, 5000);
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
+
+
+        //driver.manage().window().maximize();
+        //driver.manage().deleteAllCookies();
     }
 
     @AfterMethod
@@ -52,7 +57,7 @@ public class BaseTest {
             File sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(sourceFile, new File(directory + fileName));
         }
-        driver.quit();
+        DriverManager.disposeDriver();
     }
 }
 

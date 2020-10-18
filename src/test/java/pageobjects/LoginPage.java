@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import waits.WaitForElements;
 
 public class LoginPage extends BasePage {
 
@@ -20,37 +21,33 @@ public class LoginPage extends BasePage {
     @FindBy(id = "modal-txt-signin-email-email-format-error")
     private WebElement incorrectEmailFormatAlert;
 
-    public LoginPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-    }
-
     public LoginPage goTo() {
-        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
+        WaitForElements.waitUntilElementIsClickable(signInButton);
         signInButton.click();
-        return new LoginPage(driver, wait);
+        return new LoginPage();
     }
 
     public LoginPage login(String email, String password) {
-        wait.until(ExpectedConditions.visibilityOf(signInButton));
+        WaitForElements.waitUntilElementIsVisible(signInButton);
         signInEmailField.sendKeys(email);
-        wait.until(ExpectedConditions.visibilityOf(signInButton));
+        WaitForElements.waitUntilElementIsVisible(signInButton);
         signInPasswordField.sendKeys(password);
         loginButton.submit();
-        return new LoginPage(driver, wait);
+        return new LoginPage();
     }
 
     public boolean isPasswordRequiredAlertDisplayed() {
-        wait.until(ExpectedConditions.visibilityOf(passwordAlert));
+        WaitForElements.waitUntilElementIsVisible(passwordAlert);
         return passwordAlert.getText().contains("Please enter a password.");
     }
 
     public boolean isEmailRequiredAlertDisplayed() {
-        wait.until(ExpectedConditions.visibilityOf(emailRequiredAlert));
+        WaitForElements.waitUntilElementIsVisible(emailRequiredAlert);
         return emailRequiredAlert.getText().contains("Enter an email address.");
     }
 
     public boolean isIncorrectEmailFormatAlertDisplayed() {
-        wait.until(ExpectedConditions.visibilityOf(incorrectEmailFormatAlert));
+        WaitForElements.waitUntilElementIsVisible(incorrectEmailFormatAlert);
         return incorrectEmailFormatAlert.getText().contains("Incorrect format");
     }
 

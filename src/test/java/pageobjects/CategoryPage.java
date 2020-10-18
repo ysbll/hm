@@ -1,10 +1,12 @@
 package pageobjects;
 
+import drivers.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import waits.WaitForElements;
 
 public class CategoryPage extends BasePage {
 
@@ -20,35 +22,35 @@ public class CategoryPage extends BasePage {
     public WebElement productName;
 
     public CategoryPage addItemToFavorites() {
-        wait.until(ExpectedConditions.elementToBeClickable(favoriteButton));
+        WaitForElements.waitUntilElementIsClickable(favoriteButton);
         favoriteButton.click();
-        return new CategoryPage(driver, wait);
+        return new CategoryPage();
     }
 
     public CategoryPage goTo(String productUrl) {
-        driver.navigate().to(productUrl);
-        return new CategoryPage(driver, wait);
+        DriverManager.getWebDriver().navigate().to(productUrl);
+        return new CategoryPage();
     }
 
     public CategoryPage addItemsToFavorites(int qty) {
         for (int i = 0; i < qty; i++) {
             addItemToFavorites();
         }
-        return new CategoryPage(driver, wait);
+        return new CategoryPage();
     }
 
     public CategoryPage removeFromFavorites() {
         favoriteButtonActive.click();
-        return new CategoryPage(driver, wait);
+        return new CategoryPage();
     }
 
     public String getProductName() {
         return productName.getText();
     }
 
-    public CategoryPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        header = new HeaderPage(driver, wait);
+    public CategoryPage() {
+        super();
+        header = new HeaderPage();
     }
 
 }

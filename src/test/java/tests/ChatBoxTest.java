@@ -8,7 +8,7 @@ public class ChatBoxTest extends BaseTest {
 
     @Test
     public void shouldChatBoxBeOpened() {
-        CustomerServicePage customerServicePage = new CustomerServicePage(driver, wait)
+        CustomerServicePage customerServicePage = new CustomerServicePage()
                 .goTo(configuration.getBaseUrl() + testData.getCustomerServiceURL());
         customerServicePage.closeCookiePopup();
         customerServicePage.goToChatBox();
