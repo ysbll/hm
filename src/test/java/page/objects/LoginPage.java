@@ -12,11 +12,20 @@ public class LoginPage extends BasePage {
     @FindBy(id = "modal-txt-signin-email-required-error")
     private WebElement emailRequiredAlert;
 
-    @FindBy(xpath = "//div[contains(@class, 'Name--container')]")
-    private WebElement nameContainer;
-
     @FindBy(id = "modal-txt-signin-email-email-format-error")
     private WebElement incorrectEmailFormatAlert;
+
+    @FindBy(xpath = ".//div[@class='account parbase']")
+    private WebElement signInButton;
+
+    @FindBy(xpath = ".//input[@id='modal-txt-signin-email']")
+    private WebElement signInEmailField;
+
+    @FindBy(xpath = ".//input[@id='modal-txt-signin-password']")
+    private WebElement signInPasswordField;
+
+    @FindBy(xpath = ".//button[contains(@class,'btn-login')]")
+    private WebElement loginButton;
 
     public LoginPage goTo() {
         WaitForElements.waitUntilElementIsClickable(signInButton);

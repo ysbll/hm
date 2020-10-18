@@ -14,23 +14,7 @@ import waits.WaitForElements;
 
 public abstract class BasePage {
 
-    protected WebDriver driver;
     protected final String MAIN_URL = "https://www2.hm.com/en_us/index.html";
-
-    @FindBy(xpath = ".//div[@class='account parbase']")
-    protected WebElement signInButton;
-
-    @FindBy(xpath = ".//input[@id='modal-txt-signin-email']")
-    protected WebElement signInEmailField;
-
-    @FindBy(xpath = ".//input[@id='modal-txt-signin-password']")
-    protected WebElement signInPasswordField;
-
-    @FindBy(xpath = ".//button[contains(@class,'btn-login')]")
-    protected WebElement loginButton;
-
-    @FindBy(xpath = "//li/a[@data-signin-state='signedin']")
-    protected WebElement myAccountButton;
 
     @FindBy(xpath = "//button[@class='close icon-close-white js-close']")
     private WebElement closeCookiePopupButton;
