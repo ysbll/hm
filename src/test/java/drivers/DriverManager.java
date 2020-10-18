@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DriverManager {
     private static WebDriver driver;
+    private static final BrowserType BROWSER_TYPE = BrowserType.SAFARI;
 
     private DriverManager() {
     }
@@ -13,8 +14,7 @@ public class DriverManager {
     public static WebDriver getWebDriver() {
 
         if (driver == null) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            driver = BrowserFactory.getBrowser(BrowserType.CHROME);
         }
 
         return driver;
@@ -22,7 +22,9 @@ public class DriverManager {
 
     public static void disposeDriver() {
         driver.close();
-        driver.quit();
+        if (!BROWSER_TYPE.equals(BrowserType.SAFARI)){
+            driver.quit();
+        }
         driver = null;
     }
 }
