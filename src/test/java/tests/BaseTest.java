@@ -25,7 +25,7 @@ public class BaseTest {
     @BeforeClass
     public void getConfiguration() {
         testData = new TestDataReader("src/test/java/tests/TestData.properties");
-        configuration = new ConfigurationReader("src/main/java/configs/Configuration.properties");
+        configuration = new ConfigurationReader("src/test/java/configs/Configuration.properties");
     }
 
     @BeforeMethod
