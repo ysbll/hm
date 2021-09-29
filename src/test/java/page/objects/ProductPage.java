@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public class ProductPage extends BasePage {
     public HeaderPage header;
 
-    @FindBy(xpath = "//button[@id='favourite_']")
+    @FindBy(xpath = "//button[@id='_favourite']")
     public WebElement favoriteButton;
 
     @FindBy(xpath = "//h1[@class='primary product-item-headline']")
