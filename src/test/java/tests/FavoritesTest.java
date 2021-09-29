@@ -23,7 +23,6 @@ public class FavoritesTest extends BaseTest {
     void nameOfAddedItemToFavoriteIsCorrectFromProductPage() {
         ProductPage productPage = new ProductPage()
                 .goTo(configuration.getBaseUrl() + testData.getProductURL());
-        productPage.closeCookiePopup();
         String productName = productPage.addItemToFavorites().getProductName();
         String addedItem = productPage.header.viewFavorites().getProductName();
         Assert.assertEquals(addedItem, productName);

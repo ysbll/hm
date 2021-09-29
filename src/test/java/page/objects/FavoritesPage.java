@@ -8,7 +8,7 @@ import waits.WaitForElements;
 public class FavoritesPage extends BasePage {
     public HeaderPage header;
 
-    @FindBy(xpath = "//h3[@class ='sub-sub-heading ng-binding']")
+    @FindBy(xpath = "//h2[@class ='BodyText-module--general__2yKZb ProductTitle-module--productTitle__2D3pq BodyText-module--ellipsis__2D65P']")
     public WebElement itemName;
 
     @FindBy(xpath = "//section[@class='segment favorites-empty']/a")
