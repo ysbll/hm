@@ -1,38 +1,45 @@
 package page.objects;
 
 import drivers.DriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import waits.WaitForElements;
 
 public class FavoritesPage extends BasePage {
     public HeaderPage header;
+    private static final Logger LOGGER = LogManager.getLogger(FavoritesPage.class);
 
-    @FindBy(xpath = "//h2[@class ='BodyText-module--general__2yKZb ProductTitle-module--productTitle__2D3pq BodyText-module--ellipsis__2D65P']")
+
+    @FindBy(xpath = "//h2[contains(@class, 'ProductTitle-module')]/a")
     public WebElement itemName;
 
-    @FindBy(xpath = "//section[@class='segment favorites-empty']/a")
+    @FindBy(xpath = "//div[contains(@class, 'FavouritesEmpty--button')]/button")
     private WebElement browseNowButton;
 
-    @FindBy(xpath = "//button[@class='remove-product icon-close-black js-remove-favorite']")
+    @FindBy(xpath = "//button[contains(@class, 'RemoveButton')]")
     private WebElement removeFromFavoritesButton;
 
-    @FindBy(xpath = "//span[@class='favorite-items-quantity-number ng-binding']")
+    @FindBy(xpath = "//p[@role='region']")
     private WebElement itemsQuantity;
 
     public FavoritesPage removeItemFromFavorites() {
         WaitForElements.waitUntilElementIsClickable(removeFromFavoritesButton);
+        LOGGER.info("Remove from favorites");
         removeFromFavoritesButton.click();
         return new FavoritesPage();
     }
 
     public String getProductName() {
         WaitForElements.waitUntilElementIsVisible(itemName);
+        LOGGER.info("Get item name text");
         return itemName.getText();
     }
 
     public String getItemsQuantity() {
         WaitForElements.waitUntilElementIsVisible(itemsQuantity);
+        LOGGER.info("Get items qty");
         return itemsQuantity.getText();
     }
 
@@ -42,6 +49,7 @@ public class FavoritesPage extends BasePage {
     }
 
     public FavoritesPage goTo(String productUrl) {
+        LOGGER.info("Go to Favorites page");
         DriverManager.getWebDriver().navigate().to(productUrl);
         return new FavoritesPage();
     }
