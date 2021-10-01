@@ -1,22 +1,20 @@
 package page.objects;
 
 import drivers.DriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import waits.WaitForElements;
 
 public abstract class BasePage {
 
     protected final String MAIN_URL = "https://www2.hm.com/en_us/index.html";
+    private static final Logger logger = LogManager.getLogger(BasePage.class);
 
-    @FindBy(xpath = "//button[@class='close icon-close-white js-close']")
+
+    @FindBy(xpath = "//button[@id='onetrust-accept-btn-handler']")
     private WebElement closeCookiePopupButton;
 
     public BasePage() {
@@ -37,6 +35,7 @@ public abstract class BasePage {
     }
 
     public void refreshPage() {
+        logger.info("Refresh a page");
         DriverManager.getWebDriver().navigate().refresh();
     }
 

@@ -1,5 +1,7 @@
 package tests;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.objects.CategoryPage;
@@ -9,6 +11,8 @@ import page.objects.ProductPage;
 import java.util.Random;
 
 public class FavoritesTest extends BaseTest {
+
+    private static final Logger LOGGER = LogManager.getLogger(FavoritesTest.class);
 
     @Test
     void nameOfAddedItemToFavoriteIsCorrectFromCategoryPage() {
@@ -69,6 +73,7 @@ public class FavoritesTest extends BaseTest {
         int itemQty = rand.nextInt(15);
         CategoryPage categoryPage = new CategoryPage()
                 .goTo(configuration.getBaseUrl() + testData.getCategoryURL());
+        categoryPage.closeCookiePopup();
         String itemsQty = categoryPage.addItemsToFavorites(itemQty).header.viewFavorites().getItemsQuantity();
         Assert.assertEquals(itemsQty, itemQty + " Items");
     }
@@ -83,7 +88,10 @@ public class FavoritesTest extends BaseTest {
     @Test
     void refreshingPageDoesntAffectFavoritesList() {
         CategoryPage categoryPage = new CategoryPage()
-                .goTo(configuration.getBaseUrl() + testData.getCategoryURL()).addItemsToFavorites(2);
+                .goTo(configuration.getBaseUrl() + testData.getCategoryURL());
+        categoryPage.closeCookiePopup();
+        LOGGER.info("Add 2 items to Favorites");
+        categoryPage.addItemsToFavorites(2);
         FavoritesPage favoritesPage = new FavoritesPage().header.viewFavorites();
         favoritesPage.refreshPage();
         String itemsQty = favoritesPage.getItemsQuantity();
